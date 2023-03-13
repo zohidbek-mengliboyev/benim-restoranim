@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { MenuComponent } from "src/app/menu/menu.component";
+import { Component, OnInit, Input } from '@angular/core';
+import { Dish } from 'src/app/shared/dish';
+import { MenuComponent } from '../menu.component';
 
 @Component({
   selector: 'app-dishdetail',
@@ -7,6 +8,8 @@ import { MenuComponent } from "src/app/menu/menu.component";
   styleUrls: ['./dishdetail.component.scss']
 })
 export class DishdetailComponent implements OnInit {
+
+  @Input() dish!: Dish;
 
   constructor(public menuComp: MenuComponent) { }
 
