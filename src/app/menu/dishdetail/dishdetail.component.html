@@ -22,8 +22,8 @@
         </mat-card-title>
       </mat-card-header>
       <mat-card-content *ngFor="let item of this.menuComp.selectedDish.comments">
-        {{item.label}} <br>
-        {{item.star}} Stars <br>
+        {{item.comment}} <br>
+        {{item.rating}} Stars <br>
         --{{item.author}}
         {{item.date | date}}
       </mat-card-content>
