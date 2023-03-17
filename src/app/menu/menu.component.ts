@@ -20,8 +20,8 @@ export class MenuComponent implements OnInit {
       .then((dishes) => this.dishes = dishes);
   }
 
-  // onSelect(dish: Dish) {
-  //   this.selectedDish = dish;
-  // }
+  onSelect(dish: Dish) {
+    this.selectedDish = dish;
+  }
 
 }
