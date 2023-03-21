@@ -1,9 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Inject } from '@angular/core';
 import { Dish } from 'src/app/shared/dish';
 import { Params, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { DishService } from '../services/dish.service';
 import { switchMap } from 'rxjs/operators';
+import { Comment } from '../shared/comment';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -18,12 +20,34 @@ export class DishdetailComponent implements OnInit {
   dishIds!: string[];
   prev!: string;
   next!: string;
+  @ViewChild('cform') commentFormDirective: any;
+  comment!: Comment;
+  commentForm!: FormGroup;
+
+  formErrors: any = {
+    'author': '',
+    'comment': ''
+  }
+
+  validationMessages: any = {
+    'author': {
+      'required': 'Author Name is required.',
+      'minlength': 'Author Name must be at least 2 characters long.'
+    },
+    'comment': {
+      'required': 'Comment is required'
+    }
+  }
 
   constructor(private dishService: DishService,
     private route: ActivatedRoute,
-    private location: Location) { }
+    private location: Location,
+    private fb: FormBuilder,
+    @Inject('BaseURL') private BaseURL) { }
 
   ngOnInit() {
+    this.createForm();
+
     this.dishService.getDishIds().subscribe((dishIds) => this.dishIds = dishIds);
     this.route.params.pipe(switchMap((params: Params) => this.dishService.getDish(params['id'])))
       .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id ?? ''); });
@@ -37,6 +61,14 @@ export class DishdetailComponent implements OnInit {
 
   goBack(): void {
     this.location.back();
+  }
+
+  createForm() {
+    this.commentForm = this.fb.group({
+      author: ['', [Validators.required, Validators.minLength(2)]],
+      comment: ['', [Validators.required]],
+      rating: 0
+    });
   }
 
 }

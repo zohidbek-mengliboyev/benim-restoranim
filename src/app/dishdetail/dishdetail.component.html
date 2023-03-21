@@ -15,8 +15,8 @@
       </mat-card-header>
       <img
         mat-card-image
-        src="{{ dish.image }}"
-        alt="{{ dish.name }}"
+        src="{{ BaseURL + dish.image }}"
+        alt={{ dish.name }}
       />
       <mat-card-content>
         <p>{{ dish.description }}</p>
@@ -47,6 +47,20 @@
         </p>
       </mat-list-item>
     </mat-list>
+    <mat-list *ngIf="commentForm.valid">
+      <mat-list-item>
+        <h4 matLine>{{ commentForm.get('comment')?.value }}</h4>
+        <p matLine>{{ commentForm.get('rating')?.value }} Stars</p>
+        <p matLine>
+          <span> -- {{ commentForm.get('author')?.value }}</span>
+        </p>
+      </mat-list-item>
+    </mat-list>
+    <form novalidate [formGroup]="commentForm" #cform="ngForm">
+      <p>
+
+      </p>
+    </form>
   </div>
 
   <div fxFlex [hidden]="dish">
