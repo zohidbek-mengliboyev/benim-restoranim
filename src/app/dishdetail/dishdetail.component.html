@@ -58,8 +58,17 @@
     </mat-list>
     <form novalidate [formGroup]="commentForm" #cform="ngForm">
       <p>
-
+        <mat-form-field class="full-width">
+          <input matInput formControlName="author" placeholder="input author name">
+          <mat-error *ngIf="formErrors.author">{{formErrors.author}}</mat-error>
+        </mat-form-field>
+        <mat-slider min="1" max="5" step="1" thumbLabel></mat-slider>
+        <mat-form-field class="full-width">
+          <textarea matInput formControlName="comment" placeholder="input comment"></textarea>
+          <mat-error *ngIf="formErrors.comment">{{formErrors.comment}}</mat-error>
+        </mat-form-field>
       </p>
+      <button type="submit" mat-button class="background-primary"></button>
     </form>
   </div>
 
