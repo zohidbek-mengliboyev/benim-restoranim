@@ -16,7 +16,6 @@ export class DishdetailComponent implements OnInit {
   // @Input() dish!: Dish;
   dish!: Dish;
   errMess: string;
-  dishcopy: Dish;
   dishIds!: string[];
   prev!: string;
   next!: string;
@@ -125,18 +124,6 @@ export class DishdetailComponent implements OnInit {
   onSubmit() {
     this.comment = this.commentForm.value;
     this.comment.date = new Date().toISOString();
-    this.dishcopy.comments.push(this.comment);
-    // this.dishService.putDish(this.dishcopy).subscribe(
-    //   (dish) => {
-    //     this.dish = dish;
-    //     this.dishcopy = dish;
-    //   },
-    //   (errmess) => {
-    //     this.dish = null;
-    //     this.dishcopy = null;
-    //     this.errMess = <any>errmess;
-    //   }
-    // );
 
     this.commentFormDirective.resetForm();
     this.commentForm.reset({
